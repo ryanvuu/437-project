@@ -29,18 +29,22 @@ h2.h2-home {
 }
 
 .suggestions-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  /* display: grid;
   margin: auto 0;
   grid-template-columns: none;
   grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   max-width: 100%;
   max-height: 80%;
   border-top: var(--lineweight-border) solid var(--color-border);
   border-bottom: var(--lineweight-border) solid var(--color-border);
-  background-color: var(--color-background-content);
+  background-color: var(--color-background-content); */
 }
 
 .suggestions-container > div {

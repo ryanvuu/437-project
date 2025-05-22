@@ -13,6 +13,7 @@ export function Home() {
       <div className="suggestions-section">
         
         <h2 className="h2-home">Suggested for you</h2>
+        
         <div className="suggestions-container">
           {SONG_RECS?.map((song) => (
             <SongCard 

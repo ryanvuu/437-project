@@ -1,14 +1,22 @@
 import "./styles/discover.css";
 
-const genres = ["all", "pop", "rock", "hip-hop", "r&b", "jazz", "classical", "disco", "edm", "country"];
+interface IFilterTable {
+  genres: string[];
+  activeGenres: string[];
+  onGenreToggle:  (targetGenre: string) => void;
+}
 
-function FilterTable() {
+function FilterTable(props: IFilterTable) {
+
+
+
   return (
     <div className="genre-filters">
-      {genres?.map((genre) => (
+      {props.genres?.map((genre) => (
         <button
           key={genre}
-          className="genre-button"
+          className={props.activeGenres.includes(genre) ? "genre-active" : "genre-button"}
+          onClick={() => props.onGenreToggle(genre)}
         >
           {genre}
         </button>

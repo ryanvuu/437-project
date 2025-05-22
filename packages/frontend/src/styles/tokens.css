@@ -12,16 +12,22 @@
   
   /* bottom navbar */
   --padding-bottom-navbar: 4rem;
-  --color-background-button: #6B40F5;
   --color-background-btm-nav: rgba(231, 231, 231, 0.893);
   --color-text-btm-nav: rgb(61, 61, 61);
   
   /* borders */
   --lineweight-border: 0.15rem;
   --color-border: black;
+
+  /* discover page */
+  --color-containers-discover: #0b52bd;
   
   /* buttons */
   --size-text-button: 0.75rem;
   --padding-default-vertical: 0.5rem;
   --padding-default-horizontal: 1rem;
+  --color-text-button: rgb(255, 255, 255);
+  --color-background-button: #2777df;
+  --color-border-button: var(--color-background-button);
+  --lineweight-button-border: 0.30rem;
 }

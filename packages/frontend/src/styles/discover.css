@@ -12,17 +12,24 @@ h1.discover-h1 {
   gap: 1.75rem;
   flex-wrap: wrap;
   border: var(--lineweight-border) solid var(--color-border);
-  background-color: var(--color-background-content);
-}
-
-.genre-button.active {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--color-containers-discover);
 }
 
 .genre-button {
   padding: var(--padding-default-vertical) var(--padding-default-horizontal);
   font-size: var(--size-text-button);
+  color: var(--color-text-button);
+  background-color: var(--color-background-button);
+  border-color: rgba(255, 0, 0, 0);
+  border-radius: var(--lineweight-button-border);
+}
+
+.genre-active {
+  padding: var(--padding-default-vertical) var(--padding-default-horizontal);
+  font-size: var(--size-text-button);
+  background-color: #31C3F5;
+  border-color: rgba(255, 255, 255, 0.414);
+  border-radius: var(--lineweight-button-border);
 }
 
 .filters-songs {
@@ -34,7 +41,7 @@ h1.discover-h1 {
   width: 80%;
   max-width: 37.5rem;
   border: var(--lineweight-border) solid var(--color-border);
-  background-color: var(--color-background-content);
+  background-color: var(--color-containers-discover);
 }
 
 .song-item {
