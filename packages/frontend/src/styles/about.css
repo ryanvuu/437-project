@@ -1,0 +1,25 @@
+h1.h1-about {
+  text-align: center;
+  margin: var(--margin-default);
+}
+
+h2.h2-about {
+  margin: var(--margin-default);
+}
+
+p.p-about {
+  margin: var(--margin-default);
+}
+
+#questions-container {
+  padding: 2rem;
+  background-color: var(--color-background-section);
+}
+
+.question {
+  border: var(--lineweight-border) solid var(--color-border);
+  margin: 1rem auto;
+  max-width: 70%;
+  background-color: var(--color-background-content);
+  color: black;
+}
