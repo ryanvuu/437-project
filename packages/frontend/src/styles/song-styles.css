@@ -1,0 +1,29 @@
+h1.h1-song-details {
+  text-align: center;
+  margin: var(--margin-default);
+}
+
+#back-button {
+  text-decoration: none;
+  font-size: 2rem;
+  color: inherit;
+}
+
+#song-info-container {
+  margin: var(--margin-default);
+  padding: 2rem;
+  background-color: var(--color-background-content);
+  width: fit-content;
+}
+
+#song-info-container > p {
+  margin: 1.5rem 0;
+  font-size: 1.25rem;
+}
+
+/* For desktop display */
+@media (min-width: 1000px) {
+  #song-info-container > p {
+    font-size: 2rem;
+  }
+}

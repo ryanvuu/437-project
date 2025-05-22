@@ -1,0 +1,75 @@
+h1.discover-h1 {
+  margin: var(--margin-default);
+}
+
+.genre-filters {
+  margin: var(--margin-default) auto;
+  padding: 1.75rem 0;
+  width: 80%;
+  max-width: 37.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  border: var(--lineweight-border) solid var(--color-border);
+  background-color: var(--color-background-content);
+}
+
+.genre-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.genre-button {
+  padding: var(--padding-default-vertical) var(--padding-default-horizontal);
+  font-size: var(--size-text-button);
+}
+
+.filters-songs {
+  background-color: var(--color-background-section);
+}
+
+.song-list {
+  margin: var(--margin-default) auto;
+  width: 80%;
+  max-width: 37.5rem;
+  border: var(--lineweight-border) solid var(--color-border);
+  background-color: var(--color-background-content);
+}
+
+.song-item {
+  display: block;
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 2rem;
+  color: inherit;
+}
+
+.song-item:hover {
+  background-color: rgb(33, 33, 33);
+}
+
+#view-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.view-button {
+  padding: var(--padding-default-vertical) var(--padding-default-horizontal);
+  font-size: var(--size-text-button);
+}
+
+/* For desktop display */
+@media (min-width: 1000px) {
+  h1.discover-h1 {
+    margin-left: 3rem;
+    text-align: start;
+  }
+
+  .filters-songs {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+}

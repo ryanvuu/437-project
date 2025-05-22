@@ -1,0 +1,27 @@
+:root {
+  /* general */
+  --margin-default: 2rem;
+  --color-text: white;
+  --color-background-page: #0940E3;
+  --color-background-content: #3C97E4;
+  --color-background-section: #0962E3;
+  
+  /* heading 1 */
+  --size-text-heading-1: 2.75rem;
+  --color-text-heading-1: #e6e6e6;
+  
+  /* bottom navbar */
+  --padding-bottom-navbar: 4rem;
+  --color-background-button: #6B40F5;
+  --color-background-btm-nav: rgba(231, 231, 231, 0.893);
+  --color-text-btm-nav: rgb(61, 61, 61);
+  
+  /* borders */
+  --lineweight-border: 0.15rem;
+  --color-border: black;
+  
+  /* buttons */
+  --size-text-button: 0.75rem;
+  --padding-default-vertical: 0.5rem;
+  --padding-default-horizontal: 1rem;
+}
