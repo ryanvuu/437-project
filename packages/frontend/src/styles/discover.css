@@ -32,6 +32,11 @@ h1.discover-h1 {
   border-radius: var(--lineweight-button-border);
 }
 
+.genre-button:active,
+.genre-button:hover {
+  background-color: #31C3F5;
+}
+
 .filters-songs {
   background-color: var(--color-background-section);
 }

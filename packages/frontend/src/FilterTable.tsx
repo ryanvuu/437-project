@@ -4,6 +4,7 @@ interface IFilterTable {
   genres: string[];
   activeGenres: string[];
   onGenreToggle:  (targetGenre: string) => void;
+  onGenreClear: () => void;
 }
 
 function FilterTable(props: IFilterTable) {
@@ -21,6 +22,13 @@ function FilterTable(props: IFilterTable) {
           {genre}
         </button>
       ))}
+
+      <button
+        className="genre-button"
+        onClick={props.onGenreClear}
+      >
+        clear
+      </button>
     </div>
   )
 }

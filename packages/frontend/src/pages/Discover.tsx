@@ -5,7 +5,7 @@ import { SONG_LIST } from "../songs";
 import { useState } from "react";
 import "../styles/discover.css";
 
-const genres = ["all", "pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "disco", "edm", "country"];
+const genres = ["pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "disco", "edm", "country"];
 
 export function Discover() {
   // filterGenres is an array of strings
@@ -19,7 +19,9 @@ export function Discover() {
     }
   }
 
-  // setFilterGenres(["indie"]);
+  function clearGenres() {
+    setFilterGenres([]);
+  }
 
   const filteredSongs = filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => filterGenres.includes(song.genre.toLowerCase()));
 
@@ -33,7 +35,8 @@ export function Discover() {
       <FilterTable
         genres={genres}
         activeGenres={filterGenres}
-        onGenreToggle={toggleGenre}/>
+        onGenreToggle={toggleGenre}
+        onGenreClear={clearGenres}/>
       <div className="song-container">
         <SongList songs={filteredSongs} />
       </div>
