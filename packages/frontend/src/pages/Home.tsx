@@ -24,7 +24,8 @@ export function Home(props: IHome) {
         <div className="suggestions-container">
           {SONG_LIST?.map((song) => (
             props.favGenres.includes(song.genre.toLowerCase()) ? (
-              <SongItem 
+              <SongItem
+                key={song.id} 
                 song={song}
                 layout="vertical"
                 favSongs={props.favSongs}

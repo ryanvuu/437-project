@@ -44,7 +44,7 @@ export function Profile(props: IProfile) {
             <div className="profile-item genre-favs">
               <ul className="fav-genres-list">
                 {props.favGenres?.map((genre) => (
-                  <li>{genre}</li>
+                  <li key={genre}>{genre}</li>
                 ))}
               </ul>
               

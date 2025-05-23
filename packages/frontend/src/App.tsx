@@ -10,8 +10,8 @@ const genres = ["pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "
 
 function App() {
   const [displayName, setDisplayName] = useState("User12345");
-  const [favSongs, setFavSongs] = useState<string[]>([]);
-  const [favGenres, setFavGenres] = useState<string[]>([]);
+  const [favSongs, setFavSongs] = useState<string[]>(["song-12", "song-5", "song-2", "song-10"]);
+  const [favGenres, setFavGenres] = useState<string[]>(["pop", "edm", "indie"]);
 
   function toggleFavSong(songId: string) {
     if (favSongs.includes(songId)) {
