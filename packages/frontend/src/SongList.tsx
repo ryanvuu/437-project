@@ -5,6 +5,8 @@ import "./styles/discover.css";
 
 interface ISongList {
   songs: ISong[];
+  favoritesList: string[];
+  toggleFavorite: (songId: string) => void;
 }
 
 function SongList(props: ISongList) {
@@ -16,6 +18,9 @@ function SongList(props: ISongList) {
           <SongItem
             key={song.id} 
             song={song}
+            layout="horizontal"
+            favoritesList={props.favoritesList}
+            onToggleFavorite={props.toggleFavorite}
           />
         ))}
       </ul>

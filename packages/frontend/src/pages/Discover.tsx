@@ -7,7 +7,12 @@ import "../styles/discover.css";
 
 const genres = ["pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "disco", "edm", "country"];
 
-export function Discover() {
+interface IDiscover {
+  favoritesList: string[];
+  toggleFavorite: (songId: string) => void;
+}
+
+export function Discover(props: IDiscover) {
   // filterGenres is an array of strings
   const [filterGenres, setFilterGenres] = useState<string[]>([]);
 
@@ -38,7 +43,10 @@ export function Discover() {
         onGenreToggle={toggleGenre}
         onGenreClear={clearGenres}/>
       <div className="song-container">
-        <SongList songs={filteredSongs} />
+        <SongList
+          songs={filteredSongs}
+          favoritesList={props.favoritesList}
+          toggleFavorite={props.toggleFavorite}/>
       </div>
     </div>
     

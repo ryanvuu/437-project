@@ -8,11 +8,20 @@ import { useState } from 'react';
 
 function App() {
   const [displayName, setDisplayName] = useState("User12345");
+  const [favoriteSongs, setFavoriteSongs] = useState<string[]>([]);
+
+  function toggleFavorite(songId: string) {
+    if (favoriteSongs.includes(songId)) {
+      setFavoriteSongs(favoriteSongs.filter(id => id !== songId));
+    } else {
+      setFavoriteSongs([...favoriteSongs, songId]);
+    }
+  }
 
   return (
     <Routes>
-        <Route path="/" element={<Home displayName={displayName}/>} />
-        <Route path="/discover" element={<Discover />} />
+        <Route path="/" element={<Home displayName={displayName} favoritesList={favoriteSongs} toggleFavorite={toggleFavorite}/>} />
+        <Route path="/discover" element={<Discover favoritesList={favoriteSongs} toggleFavorite={toggleFavorite}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile displayName={displayName} setDisplayName={setDisplayName}/>} />
 

@@ -54,9 +54,6 @@ export function Profile(props: IProfile) {
         </div>
       </div>
       
-      
-
-
       <ModalDisplayName 
         headerLabel="Edit Display Name"
         currentName={props.displayName}

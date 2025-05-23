@@ -8,9 +8,6 @@ interface IFilterTable {
 }
 
 function FilterTable(props: IFilterTable) {
-
-
-
   return (
     <div className="genre-filters">
       {props.genres?.map((genre) => (
