@@ -4,9 +4,13 @@ import logo from "../images/logo.png";
 import { ModalDisplayName } from "../ModalDisplayName";
 import { useState } from "react";
 
-export function Profile() {
+interface IProfile {
+  displayName: string;
+  setDisplayName: (newDisplayName: string) => void;
+}
+
+export function Profile(props: IProfile) {
   const [isDisplayOpen, setIsDisplayOpen] = useState(false);
-  const [displayName, setDisplayName] = useState("User12345");
 
   function openModal() {
     setIsDisplayOpen(true);
@@ -22,7 +26,7 @@ export function Profile() {
         <img className="profile-pic" src={logo} alt="" height="200" width="200"></img>
 
         <div className="desktop-prof">
-          <h1 className="h1-profile">{displayName}</h1>
+          <h1 className="h1-profile">{props.displayName}</h1>
 
           <div className="profile-container">
 
@@ -55,10 +59,10 @@ export function Profile() {
 
       <ModalDisplayName 
         headerLabel="Edit Display Name"
-        currentName={displayName}
+        currentName={props.displayName}
         isOpen={isDisplayOpen}
         onCloseRequested={closeModal}
-        onDisplayNameSet={setDisplayName}
+        onDisplayNameSet={props.setDisplayName}
       />
       <Navbar />
     </div>

@@ -4,12 +4,16 @@ import logo from "../images/logo.png";
 import { SONG_RECS } from "../songs";
 import "../styles/index.css"
 
-export function Home() {
+interface IHome {
+  displayName: string;
+}
+
+export function Home(props: IHome) {
   return (
     <div>
 
       <img src={logo} alt="" height="200" width="200" />
-      <h1>Hello, Ryan</h1>
+      <h1>Hello, {props.displayName}</h1>
       <div className="suggestions-section">
         
         <h2 className="h2-home">Suggested for you</h2>
