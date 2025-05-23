@@ -6,11 +6,13 @@ import "./styles/discover.css";
 interface ISongList {
   songs: ISong[];
   favSongs: string[];
+  onRightClicked: () => void;
+  onPrevClicked: () => void;
   toggleFavorite: (songId: string) => void;
+  setCurrentSongPage: (pageIndex: number) => void;
 }
 
 function SongList(props: ISongList) {
-
   return (
     <div id="song-container">
       <ul className="song-list">
@@ -26,8 +28,16 @@ function SongList(props: ISongList) {
       </ul>
 
       <div id="view-buttons-container">
-        <button className="view-button">Back</button>
-        <button className="view-button">Next</button>
+        <button 
+          className="view-button"
+          onClick={props.onPrevClicked}
+        >Prev
+        </button>
+        <button
+          className="view-button"
+          onClick={props.onRightClicked}
+        >Next
+        </button>
       </div>
     </div>
   )
