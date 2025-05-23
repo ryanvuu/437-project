@@ -38,6 +38,13 @@ h1.discover-h1 {
   color: black;
 }
 
+.edit-genres-btns {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .filters-songs {
   background-color: var(--color-background-section);
 }

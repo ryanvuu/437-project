@@ -1,15 +1,14 @@
 import Navbar from "../Navbar";
 import SongList from "../SongList";
-import FilterTable from "../FilterTable";
+import { FilterTable } from "../FilterTable";
 import { SONG_LIST } from "../songs";
 import { useState } from "react";
 import "../styles/discover.css";
 
-const genres = ["pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "disco", "edm", "country"];
-
 interface IDiscover {
-  favoritesList: string[];
-  toggleFavorite: (songId: string) => void;
+  genres: string[];
+  favSongs: string[];
+  toggleFavSong: (songId: string) => void;
 }
 
 export function Discover(props: IDiscover) {
@@ -30,23 +29,20 @@ export function Discover(props: IDiscover) {
 
   const filteredSongs = filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => filterGenres.includes(song.genre.toLowerCase()));
 
-  console.log(genres);
-  console.log(filteredSongs);
-
   return (
   <div>
     <h1 className="discover-h1">Discover</h1>
     <div className="filters-songs">
       <FilterTable
-        genres={genres}
+        genres={props.genres}
         activeGenres={filterGenres}
         onGenreToggle={toggleGenre}
         onGenreClear={clearGenres}/>
       <div className="song-container">
         <SongList
           songs={filteredSongs}
-          favoritesList={props.favoritesList}
-          toggleFavorite={props.toggleFavorite}/>
+          favSongs={props.favSongs}
+          toggleFavorite={props.toggleFavSong}/>
       </div>
     </div>
     

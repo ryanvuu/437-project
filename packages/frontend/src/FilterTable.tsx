@@ -7,7 +7,7 @@ interface IFilterTable {
   onGenreClear: () => void;
 }
 
-function FilterTable(props: IFilterTable) {
+export function FilterTable(props: IFilterTable) {
   return (
     <div className="genre-filters">
       {props.genres?.map((genre) => (
@@ -29,5 +29,3 @@ function FilterTable(props: IFilterTable) {
     </div>
   )
 }
-
-export default FilterTable;

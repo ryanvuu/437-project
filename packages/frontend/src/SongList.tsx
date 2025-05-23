@@ -5,7 +5,7 @@ import "./styles/discover.css";
 
 interface ISongList {
   songs: ISong[];
-  favoritesList: string[];
+  favSongs: string[];
   toggleFavorite: (songId: string) => void;
 }
 
@@ -19,7 +19,7 @@ function SongList(props: ISongList) {
             key={song.id} 
             song={song}
             layout="horizontal"
-            favoritesList={props.favoritesList}
+            favSongs={props.favSongs}
             onToggleFavorite={props.toggleFavorite}
           />
         ))}

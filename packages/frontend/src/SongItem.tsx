@@ -8,7 +8,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 interface ISongItem {
   song: ISong;
   layout: string;
-  favoritesList: string[];
+  favSongs: string[];
   onToggleFavorite: (songId: string) => void;
 }
 
@@ -35,7 +35,7 @@ function SongItem( props: ISongItem ) {
           </Link>
 
           <button
-            className={props.favoritesList.includes(props.song.id) ? "active-fav-btn": "fav-btn"}
+            className={props.favSongs.includes(props.song.id) ? "active-fav-btn": "fav-btn"}
             onClick={() => props.onToggleFavorite(props.song.id)}>
             <FontAwesomeIcon icon={faHeart} title="Favorite song"/>
           </button>

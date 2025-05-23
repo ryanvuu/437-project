@@ -1,13 +1,14 @@
 import Navbar from "../Navbar";
 import SongItem from "../SongItem";
 import logo from "../images/logo.png";
-import { SONG_RECS } from "../songs";
+import { SONG_LIST } from "../songs";
 import "../styles/index.css"
 
 interface IHome {
   displayName: string;
-  favoritesList: string[];
-  toggleFavorite: (songId: string) => void;
+  favSongs: string[];
+  favGenres: string[];
+  toggleFavSong: (songId: string) => void;
 }
 
 export function Home(props: IHome) {
@@ -21,14 +22,17 @@ export function Home(props: IHome) {
         <h2 className="h2-home">Suggested for you</h2>
         
         <div className="suggestions-container">
-          {SONG_RECS?.map((song) => (
-            <SongItem 
-              song={song}
-              layout="vertical"
-              favoritesList={props.favoritesList}
-              onToggleFavorite={props.toggleFavorite}
-            />
-          ))}
+          {SONG_LIST?.map((song) => (
+            props.favGenres.includes(song.genre.toLowerCase()) ? (
+              <SongItem 
+                song={song}
+                layout="vertical"
+                favSongs={props.favSongs}
+                onToggleFavorite={props.toggleFavSong}
+              />
+            ) : (
+              null
+            )))}
         </div>
 
       </div>
