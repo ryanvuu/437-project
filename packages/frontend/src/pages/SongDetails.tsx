@@ -1,8 +1,12 @@
 import { useParams } from "react-router"
 import { SONG_LIST } from "../songs";
+import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBackward } from '@fortawesome/free-solid-svg-icons'
 import "../styles/song-styles.css";
 
 export function SongDetails() {
+  const navigate = useNavigate();
   const { songId } = useParams();
   const song = SONG_LIST.find(song => song.id === songId);
 
@@ -14,6 +18,11 @@ export function SongDetails() {
 
   return (
     <div>
+      <button
+        className="song-details-back"
+        onClick={() => navigate(-1)}>
+        <FontAwesomeIcon icon={faBackward} title="Back"/>
+      </button>
       <h1 className="h1-song-details">{song.title}</h1>
       <div id="song-info-container">
         <p><strong>Artist: {song.artist}</strong></p>

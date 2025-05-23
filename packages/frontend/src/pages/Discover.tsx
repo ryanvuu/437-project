@@ -2,7 +2,7 @@ import Navbar from "../Navbar";
 import SongList from "../SongList";
 import { FilterTable } from "../FilterTable";
 import { SONG_LIST } from "../songs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/discover.css";
 
 interface IDiscover {
@@ -28,6 +28,10 @@ export function Discover(props: IDiscover) {
   function clearGenres() {
     setFilterGenres([]);
   }
+
+  useEffect(() => {
+    setCurrentSongPage(0);
+  }, [filterGenres]);
 
   const filteredSongs = filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => filterGenres.includes(song.genre.toLowerCase()));
   const firstSongIdx = currentSongPage * songsPerPage;
