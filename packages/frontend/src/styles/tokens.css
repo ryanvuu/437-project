@@ -30,4 +30,8 @@
   --color-background-button: #2777df;
   --color-border-button: var(--color-background-button);
   --lineweight-button-border: 0.30rem;
+
+  /* modal */
+  --color-modal-button: #3B82F6;
+  --color-modal-button-hover: #1D4ED8;
 }

@@ -35,6 +35,7 @@ h1.discover-h1 {
 .genre-button:active,
 .genre-button:hover {
   background-color: #31C3F5;
+  color: black;
 }
 
 .filters-songs {
@@ -73,7 +74,7 @@ h1.discover-h1 {
 }
 
 /* For desktop display */
-@media (min-width: 1000px) {
+@media (min-width: 750px) {
   h1.discover-h1 {
     margin-left: 3rem;
     text-align: start;

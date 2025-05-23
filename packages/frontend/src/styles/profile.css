@@ -1,0 +1,169 @@
+h1.h1-profile {
+  text-align: center;
+  margin: 0;
+}
+
+.profile-pic {
+  min-width: 20rem;
+  max-width: 25rem;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.pic-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.profile-container {
+  padding: 2rem;
+  background-color: var(--color-background-section);
+}
+
+.profile-item {
+  margin: 0 auto;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  min-height: 2rem;
+}
+
+.prof-display-name {
+  min-width: 50%;
+  background-color: var(--color-background-content);
+}
+
+.genre-favs {
+  min-height: 10rem;
+  background-color: var(--color-background-content);
+}
+
+.open-prof-modal-btn {
+  background-color: var(--color-modal-button);
+  color: #FFFFFF;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+.open-prof-modal-btn:hover {
+  background-color: #46aef3;
+  color: black;
+}
+
+.modal-display-popup {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(147, 142, 142, 0.359)
+}
+
+.modal-display-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+  text-align: center;
+  border-radius: 0.3rem;
+  padding: 1.5rem;
+}
+
+.modal-display-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1.modal-display-heading {
+  margin: 0;
+  color: black;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.close-display-edit {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #6B7280;
+  background-color: transparent;
+  border: none;
+}
+
+.close-display-edit:hover {
+  color: #3d3f43
+}
+
+.edit-display-input {
+  border-width: 2px;
+  border-style: solid;
+  border-color: #4B5563;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.edit-display-set-button {
+  background-color: var(--color-modal-button);
+  color: #FFFFFF;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+
+.edit-display-set-button:hover {
+  background-color: var(--color-modal-button-hover);
+}
+
+.edit-display-set-button:active {
+  background-color: #1E40AF;
+}
+
+.edit-display-genre-btns {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* For desktop display */
+@media (min-width: 750px) {
+  h1.h1-profile {
+    margin: var(--margin-default) 0;
+    text-align: start;
+  }
+  
+  .pic-name {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: start;
+  }
+
+  .desktop-prof {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .profile-container {
+    max-width: 80%;
+    width: 100%;
+  }
+
+  .filters-songs {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+}
