@@ -9,14 +9,14 @@ h1.h1-song-details {
   color: inherit;
 }
 
-#song-info-container {
+.song-info-container {
   margin: var(--margin-default);
   padding: 2rem;
   background-color: var(--color-background-content);
   width: fit-content;
 }
 
-#song-info-container > p {
+.song-info-container > p {
   margin: 1.5rem 0;
   font-size: 1.25rem;
 }
@@ -48,12 +48,12 @@ h1.h1-song-details {
 }
 
 .song-details-back:hover {
-  color: rgb(159, 207, 247);
+  color: var(--color-back-button-hover);
 }
 
 /* For desktop display */
 @media (min-width: 750px) {
-  #song-info-container > p {
+  .song-info-container > p {
     font-size: 2rem;
   }
 }

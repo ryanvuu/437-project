@@ -21,5 +21,5 @@ p.p-about {
   margin: 1rem auto;
   max-width: 70%;
   background-color: var(--color-background-content);
-  color: black;
+  color: var(--color-text-about-question);
 }

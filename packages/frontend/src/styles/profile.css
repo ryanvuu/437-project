@@ -49,15 +49,17 @@ h1.h1-profile {
 }
 
 .fav-genres-list li {
-  padding: 1rem;
+  padding: 0.7rem;
   font-size: larger;
   font-weight: bold;
   text-align: center;
+  border-radius: 2rem;
+  background-color: var(--color-fav-genre-pill);
 }
 
 .open-prof-modal-btn {
   background-color: var(--color-modal-button);
-  color: #FFFFFF;
+  color: var(--color-text-modal-button);
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
@@ -67,7 +69,7 @@ h1.h1-profile {
 }
 
 .open-prof-modal-btn:hover {
-  background-color: #46aef3;
+  background-color: var(--color-modal-button-hover);
   color: black;
 }
 
@@ -80,7 +82,7 @@ h1.h1-profile {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(147, 142, 142, 0.359)
+  background-color: var(--color-modal-popup);
 }
 
 .modal-display-edit {
@@ -88,7 +90,7 @@ h1.h1-profile {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: white;
+  background-color: var(--color-modal-background);
   text-align: center;
   border-radius: 0.3rem;
   padding: 1.5rem;
@@ -101,7 +103,7 @@ h1.h1-profile {
 
 h1.modal-display-heading {
   margin: 0;
-  color: black;
+  color: var(--color-text-modal-heading);
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
@@ -109,19 +111,19 @@ h1.modal-display-heading {
 .close-display-edit {
   font-size: 1.25rem;
   font-weight: 500;
-  color: #6B7280;
+  color: var(--color-modal-close-button);
   background-color: transparent;
   border: none;
 }
 
 .close-display-edit:hover {
-  color: #3d3f43
+  color: var(--color-modal-close-hover)
 }
 
 .edit-display-input {
   border-width: 2px;
   border-style: solid;
-  border-color: #4B5563;
+  border-color: var(--color-display-input-border);
   border-radius: 0.25rem;
   padding: 0.75rem;
   margin-right: 0.5rem;
@@ -141,7 +143,7 @@ h1.modal-display-heading {
 }
 
 .edit-display-set-button:hover {
-  background-color: var(--color-modal-button-hover);
+  background-color: var(--color-modal-button-set-hover);
 }
 
 .edit-display-set-button:active {
@@ -151,7 +153,12 @@ h1.modal-display-heading {
 .edit-display-genre-btns {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
+}
+
+a.open-prof-modal-btn {
+  text-decoration: none;
 }
 
 /* For desktop display */

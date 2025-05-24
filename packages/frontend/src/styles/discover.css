@@ -27,14 +27,14 @@ h1.discover-h1 {
 .genre-active {
   padding: var(--padding-default-vertical) var(--padding-default-horizontal);
   font-size: var(--size-text-button);
-  background-color: #31C3F5;
-  border-color: rgba(255, 255, 255, 0.414);
+  background-color: var(--color-genre-button-active);
+  border-color: var(--color-genre-button-border-active);
   border-radius: var(--lineweight-button-border);
 }
 
 .genre-button:active,
 .genre-button:hover {
-  background-color: #31C3F5;
+  background-color: var(--color-genre-button-hover);
   color: black;
 }
 
@@ -84,13 +84,13 @@ h1.discover-h1 {
   padding: var(--padding-default-vertical) var(--padding-default-horizontal);
   font-size: var(--size-text-button);
   color: black;
-  background-color: rgb(140, 186, 223);
+  background-color: var(--color-view-button);
   border-color: rgba(255, 0, 0, 0);
   border-radius: var(--lineweight-button-border);
 }
 
 .view-button:hover {
-  background-color: rgb(159, 207, 247);
+  background-color: var(--color-view-button-hover);
 }
 
 /* For desktop display */

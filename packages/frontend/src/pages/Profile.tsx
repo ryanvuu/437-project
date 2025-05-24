@@ -1,4 +1,5 @@
 import Navbar from "../Navbar";
+import { Link } from "react-router";
 import "../styles/profile.css";
 import logo from "../images/logo.png";
 import { ModalDisplayName, ModalFavoriteGenres } from "../ProfileModals";
@@ -10,6 +11,8 @@ interface IProfile {
   favGenres: string[];
   setDisplayName: (newDisplayName: string) => void;
   toggleFavGenre: (targetGenre: string) => void;
+  isDark: boolean;
+  toggleIsDark: (isDark: boolean) => void;
 }
 
 export function Profile(props: IProfile) {
@@ -63,6 +66,20 @@ export function Profile(props: IProfile) {
                 onClick={openGenresModal}>
                 Edit Favorite Genres
               </button>
+
+              <Link
+                to="/favorites"
+                className="open-prof-modal-btn">
+                View Favorite Songs
+              </Link>
+
+              <label htmlFor="dark-mode-box">
+                <input
+                  type="checkbox"
+                  id="dark-mode-box"
+                  checked={props.isDark}
+                  onChange={() => props.toggleIsDark(!props.isDark)}/> Dark mode
+              </label>
 
             </div>
 

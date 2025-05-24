@@ -9,6 +9,7 @@ interface IHome {
   favSongs: string[];
   favGenres: string[];
   toggleFavSong: (songId: string) => void;
+  isDark: boolean;
 }
 
 export function Home(props: IHome) {

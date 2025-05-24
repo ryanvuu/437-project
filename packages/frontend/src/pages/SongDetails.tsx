@@ -24,7 +24,7 @@ export function SongDetails() {
         <FontAwesomeIcon icon={faBackward} title="Back"/>
       </button>
       <h1 className="h1-song-details">{song.title}</h1>
-      <div id="song-info-container">
+      <div className="song-info-container">
         <p><strong>Artist: {song.artist}</strong></p>
         <p><strong>Genre: {song.genre}</strong></p>
         <p><strong>Duration: {song.duration}</strong></p>
