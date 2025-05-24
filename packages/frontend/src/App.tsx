@@ -13,6 +13,9 @@ function App() {
   const [displayName, setDisplayName] = useState("User12345");
   const [favSongs, setFavSongs] = useState<string[]>(["song-12", "song-5", "song-2", "song-10", "song-15"]);
   const [favGenres, setFavGenres] = useState<string[]>(["pop", "edm", "indie"]);
+  // filterGenres is an array of strings
+  const [filterGenres, setFilterGenres] = useState<string[]>([]);
+  const [currentSongPage, setCurrentSongPage] = useState(0);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ function App() {
   return (
     <Routes>
         <Route path="/" element={<Home displayName={displayName} favSongs={favSongs} favGenres={favGenres} toggleFavSong={toggleFavSong} isDark={isDark}/>} />
-        <Route path="/discover" element={<Discover genres={genres} favSongs={favSongs} toggleFavSong={toggleFavSong}/>} />
+        <Route path="/discover" element={<Discover genres={genres} favSongs={favSongs} toggleFavSong={toggleFavSong} filterGenres={filterGenres} setFilterGenres={setFilterGenres} currentSongPage={currentSongPage} setCurrentSongPage={setCurrentSongPage}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile displayName={displayName} genres={genres} favGenres={favGenres} setDisplayName={setDisplayName} toggleFavGenre={toggleFavGenre} isDark={isDark} toggleIsDark={toggleDarkMode} />} />
         <Route path="/favorites" element={<Favorites favSongs={favSongs} toggleFavSong={toggleFavSong}/>} />

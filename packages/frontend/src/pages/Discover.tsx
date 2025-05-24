@@ -2,50 +2,48 @@ import Navbar from "../Navbar";
 import SongList from "../SongList";
 import { FilterTable } from "../FilterTable";
 import { SONG_LIST } from "../songs";
-import { useState, useEffect } from "react";
 import "../styles/discover.css";
 
 interface IDiscover {
   genres: string[];
   favSongs: string[];
   toggleFavSong: (songId: string) => void;
+  filterGenres: string[];
+  setFilterGenres: (genreList: string[]) => void;
+  currentSongPage: number;
+  setCurrentSongPage: (page: number) => void;
 }
 
 export function Discover(props: IDiscover) {
-  // filterGenres is an array of strings
-  const [filterGenres, setFilterGenres] = useState<string[]>([]);
-  const [currentSongPage, setCurrentSongPage] = useState(0);
   const songsPerPage = 5;
 
   function toggleGenre(targetGenre: string) {
-    if (filterGenres.includes(targetGenre)) {
-      setFilterGenres(filterGenres.filter(genre => genre !== targetGenre));
+    if (props.filterGenres.includes(targetGenre)) {
+      props.setFilterGenres(props.filterGenres.filter(genre => genre !== targetGenre));
     } else {
-      setFilterGenres([...filterGenres, targetGenre]);
+      props.setFilterGenres([...props.filterGenres, targetGenre]);
     }
+
+    props.setCurrentSongPage(0);
   }
 
   function clearGenres() {
-    setFilterGenres([]);
+    props.setFilterGenres([]);
   }
 
-  useEffect(() => {
-    setCurrentSongPage(0);
-  }, [filterGenres]);
-
-  const filteredSongs = filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => filterGenres.includes(song.genre.toLowerCase()));
-  const firstSongIdx = currentSongPage * songsPerPage;
+  const filteredSongs = props.filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => props.filterGenres.includes(song.genre.toLowerCase()));
+  const firstSongIdx = props.currentSongPage * songsPerPage;
   const currentSongs = filteredSongs.slice(firstSongIdx, firstSongIdx + songsPerPage);
 
   function goNextSongPage() {
-    if (currentSongPage < Math.floor(filteredSongs.length / songsPerPage)) {
-      setCurrentSongPage(currentSongPage + 1);
+    if ((props.currentSongPage + 1) * songsPerPage < filteredSongs.length) {
+      props.setCurrentSongPage(props.currentSongPage + 1);
     }
   }
 
   function goPrevSongPage() {
-    if (currentSongPage > 0) {
-      setCurrentSongPage(currentSongPage - 1);
+    if (props.currentSongPage > 0) {
+      props.setCurrentSongPage(props.currentSongPage - 1);
     }
   }
 
@@ -55,7 +53,7 @@ export function Discover(props: IDiscover) {
     <div className="filters-songs">
       <FilterTable
         genres={props.genres}
-        activeGenres={filterGenres}
+        activeGenres={props.filterGenres}
         onGenreToggle={toggleGenre}
         onGenreClear={clearGenres}/>
       <div className="song-container">
@@ -65,7 +63,7 @@ export function Discover(props: IDiscover) {
           onRightClicked={goNextSongPage}
           onPrevClicked={goPrevSongPage}
           toggleFavorite={props.toggleFavSong}
-          setCurrentSongPage={setCurrentSongPage}/>
+          setCurrentSongPage={props.setCurrentSongPage}/>
       </div>
     </div>
     
