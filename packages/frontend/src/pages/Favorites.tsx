@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from '@fortawesome/free-solid-svg-icons'
-import { SONG_LIST } from "../songs";
+import type { IApiSongData } from "../../../backend/src/common/ApiSongData.ts";
 import SongItem from "../SongItem";
 
 interface IFavorites {
+  songList: IApiSongData[];
   favSongs: string[];
   toggleFavSong: (songId: string) => void;
 }
@@ -14,7 +15,7 @@ export function Favorites(props: IFavorites) {
 
   function getFavSongNames() {
     const favSongNames = [];
-    for (const song of SONG_LIST) {
+    for (const song of props.songList) {
       if (props.favSongs.includes(song.id)) {
         favSongNames.push(song);
       }

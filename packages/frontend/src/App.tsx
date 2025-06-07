@@ -6,10 +6,15 @@ import { About } from './pages/About';
 import { Profile } from './pages/Profile';
 import { useEffect, useState } from 'react';
 import { Favorites } from './pages/Favorites';
+import { ValidRoutes } from "../../backend/src/common/ValidRoutes.ts";
+import type { IApiSongData } from '../../backend/src/common/ApiSongData.ts';
 
 const genres = ["pop", "rock", "hip-hop", "indie", "r&b", "jazz", "classical", "disco", "edm", "country"];
 
 function App() {
+  const [songData, _setSongData] = useState<IApiSongData[]>([]);
+  const [isFetchingData, setIsFetchingData] = useState(true);
+  const [hasErrOccurred, setHasErrOccurred] = useState(false);
   const [displayName, setDisplayName] = useState("User12345");
   const [favSongs, setFavSongs] = useState<string[]>(["song-12", "song-5", "song-2", "song-10", "song-15"]);
   const [favGenres, setFavGenres] = useState<string[]>(["pop", "edm", "indie"]);
@@ -42,15 +47,40 @@ function App() {
     }
   }
 
+  function updateDisplayName(newName: string) {
+    setDisplayName(newName);
+  }
+
+  useEffect(() => {
+    fetch("/api/songs")
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        setHasErrOccurred(true);
+        throw new Error(`Failed to fetch /api/songs: ${res.status}`);
+      })
+      .then(songs => {
+        _setSongData(songs);
+      })
+      .catch(error => {
+        console.error(error);
+        setHasErrOccurred(true);
+      })
+      .finally(() => {
+        setIsFetchingData(false);
+      });
+  }, []);
+
   return (
     <Routes>
-        <Route path="/" element={<Home displayName={displayName} favSongs={favSongs} favGenres={favGenres} toggleFavSong={toggleFavSong} isDark={isDark}/>} />
-        <Route path="/discover" element={<Discover genres={genres} favSongs={favSongs} toggleFavSong={toggleFavSong} filterGenres={filterGenres} setFilterGenres={setFilterGenres} currentSongPage={currentSongPage} setCurrentSongPage={setCurrentSongPage}/>} />
-        <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile displayName={displayName} genres={genres} favGenres={favGenres} setDisplayName={setDisplayName} toggleFavGenre={toggleFavGenre} isDark={isDark} toggleIsDark={toggleDarkMode} />} />
-        <Route path="/favorites" element={<Favorites favSongs={favSongs} toggleFavSong={toggleFavSong}/>} />
+        <Route path={ValidRoutes.HOME} element={<Home displayName={displayName} songList={songData} favSongs={favSongs} favGenres={favGenres} toggleFavSong={toggleFavSong} isDark={isDark} isFetchingData={isFetchingData} hasErrOccurred={hasErrOccurred} />} />
+        <Route path={ValidRoutes.DISCOVER} element={<Discover songList={songData} genres={genres} favSongs={favSongs} toggleFavSong={toggleFavSong} filterGenres={filterGenres} setFilterGenres={setFilterGenres} currentSongPage={currentSongPage} setCurrentSongPage={setCurrentSongPage} isFetchingData={isFetchingData} hasErrOccurred={hasErrOccurred} />} />
+        <Route path={ValidRoutes.ABOUT} element={<About />} />
+        <Route path={ValidRoutes.PROFILE} element={<Profile displayName={displayName} genres={genres} favGenres={favGenres} setDisplayName={updateDisplayName} toggleFavGenre={toggleFavGenre} isDark={isDark} toggleIsDark={toggleDarkMode} />} />
+        <Route path={ValidRoutes.FAVORITES} element={<Favorites songList={songData} favSongs={favSongs} toggleFavSong={toggleFavSong}/>} />
 
-        <Route path="/songs/:songId" element={<SongDetails />} />
+        <Route path={ValidRoutes.SONG_DETAILS} element={<SongDetails songList={songData} />} />
     </Routes>
   );
 }

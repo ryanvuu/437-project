@@ -1,12 +1,12 @@
 import { Link } from "react-router";
-import type { ISong } from "./songs";
+import type { IApiSongData } from "../../backend/src/common/ApiSongData.ts"
 import "./styles/discover.css";
 import image from "./images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 interface ISongItem {
-  song: ISong;
+  song: IApiSongData;
   layout: string;
   favSongs: string[];
   onToggleFavorite: (songId: string) => void;

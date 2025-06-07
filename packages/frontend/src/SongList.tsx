@@ -1,10 +1,10 @@
 import SongItem from "./SongItem";
-import { type ISong } from "./songs";
+import { type IApiSongData } from "../../backend/src/common/ApiSongData.ts";
 import "./styles/discover.css";
 
 
 interface ISongList {
-  songs: ISong[];
+  songs: IApiSongData[];
   favSongs: string[];
   onRightClicked: () => void;
   onPrevClicked: () => void;

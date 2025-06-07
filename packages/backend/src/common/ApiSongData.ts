@@ -1,6 +1,6 @@
 const IMG_TEMP = "../images/logo.png";
 
-export interface ISong {
+export interface IApiSongData {
   id: string;
   title: string;
   artist: string;
@@ -10,7 +10,7 @@ export interface ISong {
   image: string;
 }
 
-export const SONG_LIST: ISong[] = [
+const SONG_LIST: IApiSongData[] = [
   { id: "song-0", title: "Last Friday Night (T.G.I.F)", artist: "Katy Perry", genre: "Pop", duration: "03:50", releaseYear: 2011, image: IMG_TEMP },
   { id: "song-1", title: "Grenade", artist: "Bruno Mars", genre: "Pop", duration: "03:42", releaseYear: 2010, image: IMG_TEMP },
   { id: "song-2", title: "Light Heist", artist: "Chief Keef", genre: "Hip-hop", duration: "04:01", releaseYear: 2016, image: IMG_TEMP },
@@ -29,3 +29,10 @@ export const SONG_LIST: ISong[] = [
   { id: "song-15", title: "So What", artist: "Miles Davis", genre: "Jazz", duration: "09:04", releaseYear: 1959, image: IMG_TEMP },
   { id: "song-16", title: "Scheherazade", artist: "Nikolai Rimsky-Korsakov", genre: "Classical", duration: "50:00", releaseYear: 1888, image: IMG_TEMP },
 ]
+
+let fetchCount = 0;
+export function fetchDataFromServer() {
+  fetchCount++;
+  console.log(`Fetching data ${fetchCount}`);
+  return SONG_LIST;
+}

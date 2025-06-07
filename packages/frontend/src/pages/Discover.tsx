@@ -1,10 +1,11 @@
 import Navbar from "../Navbar";
 import SongList from "../SongList";
 import { FilterTable } from "../FilterTable";
-import { SONG_LIST } from "../songs";
+import type { IApiSongData } from "../../../backend/src/common/ApiSongData.ts";
 import "../styles/discover.css";
 
 interface IDiscover {
+  songList: IApiSongData[];
   genres: string[];
   favSongs: string[];
   toggleFavSong: (songId: string) => void;
@@ -12,6 +13,8 @@ interface IDiscover {
   setFilterGenres: (genreList: string[]) => void;
   currentSongPage: number;
   setCurrentSongPage: (page: number) => void;
+  isFetchingData: boolean;
+  hasErrOccurred: boolean;
 }
 
 export function Discover(props: IDiscover) {
@@ -31,7 +34,7 @@ export function Discover(props: IDiscover) {
     props.setFilterGenres([]);
   }
 
-  const filteredSongs = props.filterGenres.length === 0 ? SONG_LIST : SONG_LIST.filter(song => props.filterGenres.includes(song.genre.toLowerCase()));
+  const filteredSongs = props.filterGenres.length === 0 ? props.songList : props.songList.filter(song => props.filterGenres.includes(song.genre.toLowerCase()));
   const firstSongIdx = props.currentSongPage * songsPerPage;
   const currentSongs = filteredSongs.slice(firstSongIdx, firstSongIdx + songsPerPage);
 
@@ -57,13 +60,17 @@ export function Discover(props: IDiscover) {
         onGenreToggle={toggleGenre}
         onGenreClear={clearGenres}/>
       <div className="song-container">
+        {props.isFetchingData ? <p style={{fontSize: "2rem", margin: "2rem"}}>Loading songs...</p> : null}
+        {props.hasErrOccurred ? <p style={{fontSize: "2rem", color: "#F9EE45", margin: "2rem"}}>Failed to load songs.</p> : null}
+        {!props.isFetchingData && !props.hasErrOccurred ?
         <SongList
           songs={currentSongs}
           favSongs={props.favSongs}
           onRightClicked={goNextSongPage}
           onPrevClicked={goPrevSongPage}
           toggleFavorite={props.toggleFavSong}
-          setCurrentSongPage={props.setCurrentSongPage}/>
+          setCurrentSongPage={props.setCurrentSongPage}/> : null}
+       
       </div>
     </div>
     

@@ -1,15 +1,18 @@
 import Navbar from "../Navbar";
 import SongItem from "../SongItem";
 import logo from "../images/logo.png";
-import { SONG_LIST } from "../songs";
+import type { IApiSongData } from "../../../backend/src/common/ApiSongData.ts";
 import "../styles/index.css"
 
 interface IHome {
   displayName: string;
+  songList: IApiSongData[];
   favSongs: string[];
   favGenres: string[];
   toggleFavSong: (songId: string) => void;
   isDark: boolean;
+  isFetchingData: boolean;
+  hasErrOccurred: boolean;
 }
 
 export function Home(props: IHome) {
@@ -22,20 +25,24 @@ export function Home(props: IHome) {
         
         <h2 className="h2-home">Suggested for you</h2>
         
-        <div className="suggestions-container">
-          {SONG_LIST?.map((song) => (
-            props.favGenres.includes(song.genre.toLowerCase()) ? (
-              <SongItem
-                key={song.id} 
-                song={song}
-                layout="vertical"
-                favSongs={props.favSongs}
-                onToggleFavorite={props.toggleFavSong}
-              />
-            ) : (
-              null
-            )))}
-        </div>
+        {props.isFetchingData ? <p style={{fontSize: "2rem", margin: "2rem"}}>Loading songs...</p> : null}
+        {props.hasErrOccurred ? <p style={{fontSize: "2rem", color: "#F9EE45", margin: "2rem"}}>Failed to load songs.</p> : null}
+        {!props.isFetchingData && !props.hasErrOccurred ?
+          <div className="suggestions-container">
+            {props.songList?.map((song) => (
+              props.favGenres.includes(song.genre.toLowerCase()) ? (
+                <SongItem
+                  key={song.id} 
+                  song={song}
+                  layout="vertical"
+                  favSongs={props.favSongs}
+                  onToggleFavorite={props.toggleFavSong}
+                />
+              ) : (
+                null
+              )))}
+          </div> : null}
+        
 
       </div>
 

@@ -1,14 +1,18 @@
 import { useParams } from "react-router"
-import { SONG_LIST } from "../songs";
+import type { IApiSongData } from "../../../backend/src/common/ApiSongData.ts";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from '@fortawesome/free-solid-svg-icons'
 import "../styles/song-styles.css";
 
-export function SongDetails() {
+interface ISongDetails {
+  songList: IApiSongData[];
+}
+
+export function SongDetails(props: ISongDetails) {
   const navigate = useNavigate();
   const { songId } = useParams();
-  const song = SONG_LIST.find(song => song.id === songId);
+  const song = props.songList.find(song => song.id === songId);
 
   if (!song) {
     return (
