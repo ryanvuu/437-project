@@ -3,15 +3,17 @@ import type { IApiSongData } from "../../backend/src/common/ApiSongData.ts"
 import "./styles/discover.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { useToggleFavorite } from "../hooks/favorites.ts";
 
 interface ISongItem {
   song: IApiSongData;
   layout: string;
   favSongs: IApiSongData[];
-  onToggleFavorite: (song: IApiSongData) => void;
 }
 
 function SongItem( props: ISongItem ) {
+  const { mutate: toggleFavorite } = useToggleFavorite();
+
   return (
     <div>
       {props.layout === "vertical" ? (
@@ -35,7 +37,7 @@ function SongItem( props: ISongItem ) {
 
           <button
             className={props.favSongs.some(fav => fav.id === props.song.id) ? "active-fav-btn": "fav-btn"}
-            onClick={() => props.onToggleFavorite(props.song)}>
+            onClick={() => toggleFavorite(props.song)}>
             <FontAwesomeIcon icon={faHeart} title="Favorite song"/>
           </button>
         </div>

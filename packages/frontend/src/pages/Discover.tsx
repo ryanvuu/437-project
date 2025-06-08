@@ -8,7 +8,6 @@ interface IDiscover {
   songList: IApiSongData[];
   genres: string[];
   favSongs: IApiSongData[];
-  toggleFavSong: (songId: IApiSongData) => void;
   filterGenres: string[];
   setFilterGenres: (genreList: string[]) => void;
   currentSongPage: number;
@@ -68,7 +67,6 @@ export function Discover(props: IDiscover) {
           favSongs={props.favSongs}
           onRightClicked={goNextSongPage}
           onPrevClicked={goPrevSongPage}
-          toggleFavorite={props.toggleFavSong}
           setCurrentSongPage={props.setCurrentSongPage}
           /> : null}
        

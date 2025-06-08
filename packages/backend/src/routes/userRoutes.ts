@@ -5,7 +5,8 @@ import { UserProvider } from "../UserProvider";
 export function registerUserRoutes(app: express.Application, userProvider: UserProvider) {
 
   // Get a user's favorite songs
-  app.get("/api/users/:username/favorites", async (req: Request, res: Response): Promise<any> => {
+  // endpoint will eventually be /api/favorites after adding authentication
+  app.get("/api/:username/favorites", async (req: Request, res: Response): Promise<any> => {
     const username = req.params.username;
 
     if (!username) {
@@ -36,7 +37,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Add a song to a user's favorite songs
-  app.put("/api/users/:username/favorites", async (req: Request, res: Response): Promise<any> => {
+  // endpoint will eventually be /api/favorites after adding authentication
+  app.put("/api/:username/favorites", async (req: Request, res: Response): Promise<any> => {
     const username = req.params.username;
     const songId = req.body.songId;
 
@@ -82,7 +84,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Remove a song from a user's favorite songs
-  app.delete("/api/users/:username/favorites/:songId", async (req: Request, res: Response): Promise<any> => {
+  // endpoint will eventually be /api/favorites/:songId after adding authentication
+  app.delete("/api/:username/favorites/:songId", async (req: Request, res: Response): Promise<any> => {
     const username = req.params.username;
     const songId = req.params.songId;
 
@@ -126,6 +129,18 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
         return res.status(500).send();
       });
   });
+
+  // app.get("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+  //   ...
+  // });
+
+  // app.put("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+  //   ...
+  // });
+
+  // app.delete("/api/:username/genre-preferences/:genre", async (req: Request, res: Response): Promise<any> => {
+  //   ...
+  // });
 
 
 }

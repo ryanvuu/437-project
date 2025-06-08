@@ -7,7 +7,6 @@ interface ISongList {
   favSongs: IApiSongData[];
   onRightClicked: () => void;
   onPrevClicked: () => void;
-  toggleFavorite: (song: IApiSongData) => void;
   setCurrentSongPage: (pageIndex: number) => void;
 }
 
@@ -21,7 +20,6 @@ function SongList(props: ISongList) {
             song={song}
             layout="horizontal"
             favSongs={props.favSongs}
-            onToggleFavorite={props.toggleFavorite}
           />
         ))}
       </ul>

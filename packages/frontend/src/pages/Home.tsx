@@ -9,7 +9,6 @@ interface IHome {
   songList: IApiSongData[];
   favSongs: IApiSongData[];
   favGenres: string[];
-  toggleFavSong: (songId: IApiSongData) => void;
   isDark: boolean;
   isFetchingData: boolean;
   hasErrOccurred: boolean;
@@ -36,7 +35,6 @@ export function Home(props: IHome) {
                   song={song}
                   layout="vertical"
                   favSongs={props.favSongs}
-                  onToggleFavorite={props.toggleFavSong}
                 />
               ) : (
                 null

@@ -54,7 +54,7 @@ export class UserProvider {
         }
       ]).toArray()
         .then(results => {
-          return results.length > 0 && results[0].favorites ? results[0].favorites : [];
+          return results.length > 0 && results[0].favorites ? results[0].favorites : null;
         });
     }
 

@@ -2,13 +2,13 @@
 GET http://localhost:3000/api/songs
 
 ### Get a user's favorites - SUCCESS
-GET http://localhost:3000/api/users/dummy/favorites
+GET http://localhost:3000/api/dummy/favorites
 
 ### Get a user's favorites - FAIL (user doesn't exist)
-GET http://localhost:3000/api/users/lol/favorites
+GET http://localhost:3000/api/lol/favorites
 
 ### Add a song to a user's favorites - SUCCESS
-PUT http://localhost:3000/api/users/dummy/favorites
+PUT http://localhost:3000/api/dummy/favorites
 Content-Type: application/json
 
 {
@@ -16,11 +16,11 @@ Content-Type: application/json
 }
 
 ### Add a song to a user's favorites - FAIL (missing request body)
-PUT http://localhost:3000/api/users/dummy/favorites
+PUT http://localhost:3000/api/dummy/favorites
 Content-Type: application/json
 
 ### Add a song to a user's favorites - FAIL (user doesn't exist)
-PUT http://localhost:3000/api/users/lol/favorites
+PUT http://localhost:3000/api/lol/favorites
 Content-Type: application/json
 
 {
@@ -28,9 +28,9 @@ Content-Type: application/json
 }
 
 ### Remove a song from a user's favorites - SUCCESS
-DELETE http://localhost:3000/api/users/dummy/favorites/6844b4f6111aaa936aa3932e
+DELETE http://localhost:3000/api/dummy/favorites/6844b4f6111aaa936aa3932e
 Content-Type: application/json
 
 ### Remove a song from a user's favorites - FAIL (user doesn't exist)
-DELETE http://localhost:3000/api/users/lol/favorites
+DELETE http://localhost:3000/api/lol/favorites/6844b4f6111aaa936aa3932e
 Content-Type: application/json
