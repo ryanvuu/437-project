@@ -4,10 +4,10 @@ import "./styles/discover.css";
 
 interface ISongList {
   songs: IApiSongData[];
-  favSongs: string[];
+  favSongs: IApiSongData[];
   onRightClicked: () => void;
   onPrevClicked: () => void;
-  toggleFavorite: (songId: string) => void;
+  toggleFavorite: (song: IApiSongData) => void;
   setCurrentSongPage: (pageIndex: number) => void;
 }
 

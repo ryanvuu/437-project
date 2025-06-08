@@ -39,6 +39,10 @@ h1.h1-song-details {
   color: red;
 }
 
+.active-fav-btn:hover {
+  color: rgba(245, 94, 94, 0.768);;
+}
+
 .song-details-back {
   margin: 0 var(--margin-default);
   font-size: 2rem;

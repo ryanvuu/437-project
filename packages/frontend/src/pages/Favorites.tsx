@@ -5,25 +5,12 @@ import type { IApiSongData } from "../../../backend/src/common/ApiSongData.ts";
 import SongItem from "../SongItem";
 
 interface IFavorites {
-  songList: IApiSongData[];
-  favSongs: string[];
-  toggleFavSong: (songId: string) => void;
+  favSongs: IApiSongData[];
+  toggleFavSong: (song: IApiSongData) => void;
 }
 
 export function Favorites(props: IFavorites) {
   const navigate = useNavigate();
-
-  function getFavSongNames() {
-    const favSongNames = [];
-    for (const song of props.songList) {
-      if (props.favSongs.includes(song.id)) {
-        favSongNames.push(song);
-      }
-    }
-    return favSongNames;
-  }
-
-  const favSongNames = getFavSongNames();
   
   return (
     <div>
@@ -35,8 +22,8 @@ export function Favorites(props: IFavorites) {
       
       <h1 className="h1-song-details">Your Favorites</h1>
       <div className="song-info-container">
-        {favSongNames?.map(song => (
-          <SongItem song={song} layout="horizontal" favSongs={props.favSongs} onToggleFavorite={props.toggleFavSong}/>
+        {props.favSongs?.map(song => (
+          <SongItem key={song.id} song={song} layout="horizontal" favSongs={props.favSongs} onToggleFavorite={props.toggleFavSong}/>
         ))}
       </div>
     </div>

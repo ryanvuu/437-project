@@ -2,22 +2,23 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { ValidRoutes } from "./common/ValidRoutes";
-import { fetchDataFromServer } from "./common/ApiSongData";
+import { connectMongo } from "./connectMongo";
+import { SongProvider } from "./SongProvider";
+import { UserProvider } from "./UserProvider";
+import { registerSongRoutes } from "./routes/songRoutes";
+import { registerUserRoutes } from "./routes/userRoutes";
 
 dotenv.config(); // Read the .env file in the current working directory, and load values into process.env.
 const PORT = process.env.PORT || 3000;
 const STATIC_DIR = process.env.STATIC_DIR || "public";
+const SONG_COVERS_DIR = process.env.SONG_COVERS_DIR || "covers";
 
 const app = express();
+
+app.use(express.json());
+
 app.use(express.static(STATIC_DIR));
-
-function waitDuration(numMs: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, numMs));
-}
-
-app.get("/api/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
-});
+app.use("/covers", express.static(SONG_COVERS_DIR));
 
 app.get(Object.values(ValidRoutes), (req: Request, res: Response) => {
     const options = {
@@ -26,17 +27,17 @@ app.get(Object.values(ValidRoutes), (req: Request, res: Response) => {
     res.sendFile("index.html", options);
 });
 
-app.get("/api/songs", (req: Request, res: Response) => {
-    waitDuration(2000)
-        .then(() => {
-            res.json(fetchDataFromServer());
-        })
-        .catch(error => {
-            console.error("Error getting songs", error);
-            res.status(500).send();
-        });
-});
-
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
+connectMongo().connect()
+    .then(client => {
+        const songProvider = new SongProvider(client);
+        const userProvider = new UserProvider(client);
+        registerSongRoutes(app, songProvider);
+        registerUserRoutes(app, userProvider);
+    })
+    .catch(error => {
+        console.error("MongoDB connection failed:", error);
+    });

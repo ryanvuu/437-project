@@ -7,9 +7,9 @@ import "../styles/index.css"
 interface IHome {
   displayName: string;
   songList: IApiSongData[];
-  favSongs: string[];
+  favSongs: IApiSongData[];
   favGenres: string[];
-  toggleFavSong: (songId: string) => void;
+  toggleFavSong: (songId: IApiSongData) => void;
   isDark: boolean;
   isFetchingData: boolean;
   hasErrOccurred: boolean;
