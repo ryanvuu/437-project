@@ -3,7 +3,7 @@ import type { IApiSongData } from "../../backend/src/common/ApiSongData.ts"
 import "./styles/discover.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useToggleFavorite } from "../hooks/favorites.ts";
+import { useToggleFavorite } from "../hooks/queryFavorites.ts";
 
 interface ISongItem {
   song: IApiSongData;

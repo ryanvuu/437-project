@@ -33,7 +33,9 @@ export function Discover(props: IDiscover) {
     props.setFilterGenres([]);
   }
 
-  const filteredSongs = props.filterGenres.length === 0 ? props.songList : props.songList.filter(song => props.filterGenres.includes(song.genre.toLowerCase()));
+  const filteredSongs = props.filterGenres.length === 0
+    ? props.songList || []
+    : props.songList?.filter(song => props.filterGenres.includes(song.genre.toLowerCase())) || [];
   const firstSongIdx = props.currentSongPage * songsPerPage;
   const currentSongs = filteredSongs.slice(firstSongIdx, firstSongIdx + songsPerPage);
 

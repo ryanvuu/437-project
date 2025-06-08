@@ -7,7 +7,7 @@ export function useFavorites() {
     queryFn: async () => {
       const res = await fetch("/api/dummy/favorites");
       if (!res.ok) {
-        throw new Error("Failed to get favorites");
+        throw new Error(`Failed to get favorites: ${res.status}`);
       }
       return res.json();
     }
@@ -36,7 +36,7 @@ export function useToggleFavorite() {
       });
 
       if (!res.ok) {
-        throw new Error(`Failed to ${isFavorited ? "remove" : "add"} favorite`);
+        throw new Error(`Failed to ${isFavorited ? "remove" : "add"} favorite: ${res.status}`);
       }
     },
     onSuccess: () => {
