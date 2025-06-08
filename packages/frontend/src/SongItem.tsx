@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import type { IApiSongData } from "../../backend/src/common/ApiSongData.ts"
 import "./styles/discover.css";
-import image from "./images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
@@ -22,7 +21,7 @@ function SongItem( props: ISongItem ) {
         >
           <div className="suggestions-item">
             <p>{props.song.title}</p>
-            <img src={image} alt={`${props.song.title} album cover`} className="album-cover" />
+            <img src={props.song.image} className="album-cover" />
           </div>
         </Link>
       ) : (

@@ -2,7 +2,6 @@ import SongItem from "./SongItem";
 import { type IApiSongData } from "../../backend/src/common/ApiSongData.ts";
 import "./styles/discover.css";
 
-
 interface ISongList {
   songs: IApiSongData[];
   favSongs: string[];

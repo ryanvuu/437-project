@@ -16,7 +16,7 @@ function App() {
   const [isFetchingData, setIsFetchingData] = useState(true);
   const [hasErrOccurred, setHasErrOccurred] = useState(false);
   const [displayName, setDisplayName] = useState("User12345");
-  const [favSongs, setFavSongs] = useState<string[]>(["song-12", "song-5", "song-2", "song-10", "song-15"]);
+  const [favSongs, setFavSongs] = useState<string[]>([]);
   const [favGenres, setFavGenres] = useState<string[]>(["pop", "edm", "indie"]);
   // filterGenres is an array of strings
   const [filterGenres, setFilterGenres] = useState<string[]>([]);

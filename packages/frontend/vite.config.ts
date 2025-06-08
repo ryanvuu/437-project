@@ -7,7 +7,8 @@ export default defineConfig({
     plugins: [react(), checker({ typescript: true })],
     server: {
         proxy: {
-            "/api": "http://localhost:3000"
+            "/api": "http://localhost:3000",
+            "/covers": "http://localhost:3000"
         }
     }
 });
