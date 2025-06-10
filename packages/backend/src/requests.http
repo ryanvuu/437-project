@@ -29,8 +29,38 @@ Content-Type: application/json
 
 ### Remove a song from a user's favorites - SUCCESS
 DELETE http://localhost:3000/api/dummy/favorites/6844b4f6111aaa936aa3932e
-Content-Type: application/json
 
 ### Remove a song from a user's favorites - FAIL (user doesn't exist)
 DELETE http://localhost:3000/api/lol/favorites/6844b4f6111aaa936aa3932e
+
+### Get a user's genre preferences - SUCCESS
+GET http://localhost:3000/api/dummy/genre-preferences
+
+### Get a user's genre preferences - FAIL (user doesn't exist)
+GET http://localhost:3000/api/lol/genre-preferences
+
+### Add a genre to a user's genre preferences - SUCCESS
+PUT http://localhost:3000/api/dummy/genre-preferences
 Content-Type: application/json
+
+{
+  "genre": "classical"  
+}
+
+### Add a genre to a user's genre preferences - FAIL (missing request body)
+PUT http://localhost:3000/api/dummy/genre-preferences
+Content-Type: application/json
+
+### Add a genre to a user's genre preferences - FAIL (user doesn't exist)
+PUT http://localhost:3000/api/lol/genre-preferences
+Content-Type: application/json
+
+{
+  "genre": "classical" 
+}
+
+### Remove a genre from a user's genre preferences - SUCCESS
+DELETE http://localhost:3000/api/dummy/genre-preferences/classical
+
+### Remove a genre from a user's genre preferences - FAIL (user doesn't exist)
+DELETE http://localhost:3000/api/lol/genre-preferences/classical

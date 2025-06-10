@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useState } from 'react';
+import { useToggleGenrePrefs } from '../hooks/queryGenrePrefs';
 
 interface IModalDisplayName {
   headerLabel: string;
@@ -17,18 +18,16 @@ interface IEditDisplayName {
   hasSubmitErr: boolean;
 }
 
-interface IEditFavoriteGenres {
+interface IEditGenrePrefs {
   genres: string[];
-  favGenres: string[];
-  onToggleFavGenre: (targetGenre: string) => void;
+  genrePrefs: string[];
 }
 
-interface IModalFavoriteGenres {
+interface IModalGenrePrefs {
   headerLabel: string;
   genres: string[];
-  favGenres: string[];
+  genrePrefs: string[];
   isOpen: boolean;
-  onToggleFavGenre: (targetGenre: string) => void;
   onCloseRequested: () => void;
 }
 
@@ -120,7 +119,7 @@ function EditDisplayName(props: IEditDisplayName) {
   )
 }
 
-export function ModalFavoriteGenres(props: IModalFavoriteGenres) {
+export function ModalGenrePrefs(props: IModalGenrePrefs) {
   const innerDivRef = useRef<HTMLDivElement>(null);
 
   function handleModalClicked(e: React.MouseEvent<HTMLElement>) {
@@ -148,24 +147,25 @@ export function ModalFavoriteGenres(props: IModalFavoriteGenres) {
             aria-label="Close"
             onClick={props.onCloseRequested}>X</button>
         </header>
-        <EditFavoriteGenres
+        <EditGenrePrefs
           genres={props.genres}
-          favGenres={props.favGenres}
-          onToggleFavGenre={props.onToggleFavGenre}
+          genrePrefs={props.genrePrefs}
         />
       </div>
     </div>
   );
 }
 
-function EditFavoriteGenres(props: IEditFavoriteGenres) {
+function EditGenrePrefs(props: IEditGenrePrefs) {
+  const { mutate: onToggleFavGenre } = useToggleGenrePrefs();
+
   return (
     <div className="edit-genres-btns">
       {props.genres?.map((genre) => (
         <button
           key={genre}
-          className={props.favGenres.includes(genre) ? "genre-active" : "genre-button"}
-          onClick={() => props.onToggleFavGenre(genre)}
+          className={props.genrePrefs.includes(genre) ? "genre-active" : "genre-button"}
+          onClick={() => onToggleFavGenre(genre)}
         >
           {genre} 
         </button>

@@ -78,4 +78,32 @@ export class UserProvider {
       });
     }
 
+    async getGenrePrefs(username: string) {
+      return this.collection.findOne({ username: username })
+        .then(userDoc => {
+          return userDoc?.genrePrefs;
+        });
+    }
+
+    async addToGenrePrefs(username: string, genre: string): Promise<number> {
+      return this.collection.updateOne(
+        { username: username },
+        { $addToSet: { genrePrefs: genre } }
+      )
+        .then(updatedDoc => {
+          return updatedDoc.matchedCount;
+        });
+    }
+
+    async removeFromGenrePrefs(username: string, genre: string): Promise<number> {
+      return this.collection.updateOne(
+        { username: username },
+        { $pull: { genrePrefs: genre } }
+      )
+      .then(updatedDoc => {
+        return updatedDoc.matchedCount;
+      });
+    }
+
+
 }

@@ -8,7 +8,7 @@ interface IHome {
   displayName: string;
   songList: IApiSongData[];
   favSongs: IApiSongData[];
-  favGenres: string[];
+  genrePrefs: string[];
   isDark: boolean;
   isFetchingData: boolean;
   hasErrOccurred: boolean;
@@ -29,7 +29,7 @@ export function Home(props: IHome) {
         {!props.isFetchingData && !props.hasErrOccurred ?
           <div className="suggestions-container">
             {props.songList?.map((song) => (
-              props.favGenres.includes(song.genre.toLowerCase()) ? (
+              props.genrePrefs.includes(song.genre.toLowerCase()) ? (
                 <SongItem
                   key={song.id} 
                   song={song}

@@ -38,6 +38,10 @@ h1.discover-h1 {
   color: black;
 }
 
+.genre-active:hover {
+  background-color: rgba(15, 159, 216, 0.837);
+}
+
 .edit-genres-btns {
   display: flex;
   justify-content: flex-start;

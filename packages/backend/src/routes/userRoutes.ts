@@ -130,17 +130,113 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
       });
   });
 
-  // app.get("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
-  //   ...
-  // });
+  // Get a user's genre preferences
+  // endpoint will eventually be /api/genre-preferences after adding authentication
+  app.get("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+    const username = req.params.username;
 
-  // app.put("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
-  //   ...
-  // });
+    if (!username) {
+      return res.status(400).send({
+        error: "Bad Request",
+        message: "User not logged in"
+      });
+    }
 
-  // app.delete("/api/:username/genre-preferences/:genre", async (req: Request, res: Response): Promise<any> => {
-  //   ...
-  // });
+    userProvider.getGenrePrefs(username)
+      .then(genres => {
+        if (!genres) {
+          return res.status(404).send({
+            error: "Not Found",
+            message: "User doesn't exist"
+          });
+        }
+
+        waitDuration(2000)
+          .then(() => {
+            res.json(genres);
+          });
+      })
+      .catch(error => {
+        console.error("Error! Failed to get user's genre preferences:", error);
+        return res.status(500).send();
+      });
+  });
+
+  // Add a song to a user's genre preferences
+  // endpoint will eventually be /api/genre-preferences after adding authentication
+  app.put("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+    const username = req.params.username;
+    const genre = req.body.genre;
+
+    if (!username) {
+      return res.status(400).send({
+        error: "Bad Request",
+        message: "User not logged in"
+      });
+    }
+
+    if (!genre) {
+      return res.status(400).send({
+        error: "Bad Request",
+        message: "Missing genre"
+      });
+    }
+
+    userProvider.addToGenrePrefs(username, genre)
+      .then(numDocsUpdated => {
+        if (numDocsUpdated > 0) {
+          return res.status(204).send();
+        }
+        else {
+          return res.status(404).send({
+            error: "Not Found",
+            message: "User does not exist"
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Failed to add to user's genre preferences:", error);
+        return res.status(500).send();
+      });
+  });
+
+  // Add a song to a user's genre preferences
+  // endpoint will eventually be /api/genre-preferences after adding authentication
+   app.delete("/api/:username/genre-preferences/:genre", async (req: Request, res: Response): Promise<any> => {
+    const username = req.params.username;
+    const genre = req.params.genre;
+
+    if (!username) {
+      return res.status(400).send({
+        error: "Bad Request",
+        message: "User not logged in"
+      });
+    }
+
+    if (!genre) {
+      return res.status(400).send({
+        error: "Bad Request",
+        message: "Missing genre"
+      });
+    }
+
+    userProvider.removeFromGenrePrefs(username, genre)
+      .then(numDocsUpdated => {
+        if (numDocsUpdated > 0) {
+          return res.status(204).send();
+        }
+        else {
+          return res.status(404).send({
+            error: "Not Found",
+            message: "User does not exist"
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Failed to remove from user's genre preferences:", error);
+        return res.status(500).send();
+      });
+  });
 
 
 }

@@ -42,5 +42,5 @@ export function useToggleFavorite() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
     }
-  })
+  });
 }

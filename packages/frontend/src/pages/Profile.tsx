@@ -2,17 +2,18 @@ import Navbar from "../Navbar";
 import { Link } from "react-router";
 import "../styles/profile.css";
 import logo from "../images/logo.png";
-import { ModalDisplayName, ModalFavoriteGenres } from "../ProfileModals";
+import { ModalDisplayName, ModalGenrePrefs } from "../ProfileModals";
 import { useState } from "react";
 
 interface IProfile {
   displayName: string;
   genres: string[];
-  favGenres: string[];
+  genrePrefs: string[];
   setDisplayName: (newDisplayName: string) => void;
-  toggleFavGenre: (targetGenre: string) => void;
   isDark: boolean;
   toggleIsDark: (isDark: boolean) => void;
+  isGenrePrefsLoading: boolean;
+  isGenrePrefsError: boolean;
 }
 
 export function Profile(props: IProfile) {
@@ -45,11 +46,15 @@ export function Profile(props: IProfile) {
 
           <div className="profile-container">
             <div className="profile-item genre-favs">
-              <ul className="fav-genres-list">
-                {props.favGenres?.map((genre) => (
-                  <li key={genre}>{genre}</li>
-                ))}
-              </ul>
+              {props.isGenrePrefsLoading ? <p style={{fontSize: "2rem", margin: "2rem"}}>Loading genres...</p> : null}
+              {props.isGenrePrefsError ? <p style={{fontSize: "2rem", color: "#F9EE45", margin: "2rem"}}>Failed to load genres.</p> : null}
+              {!props.isGenrePrefsLoading && !props.isGenrePrefsError
+                ? <ul className="fav-genres-list">
+                    {props.genrePrefs?.map((genre) => (
+                      <li key={genre}>{genre}</li>
+                    ))}
+                  </ul>
+                : null}
               
             </div>
 
@@ -96,12 +101,11 @@ export function Profile(props: IProfile) {
         onDisplayNameSet={props.setDisplayName}
       />
 
-      <ModalFavoriteGenres
+      <ModalGenrePrefs
         headerLabel="Edit Favorite Genres"
         genres={props.genres}
-        favGenres={props.favGenres}
+        genrePrefs={props.genrePrefs}
         isOpen={isFavGenresOpen}
-        onToggleFavGenre={props.toggleFavGenre}
         onCloseRequested={closeGenresModal}
       />
       <Navbar />
