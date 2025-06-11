@@ -1,13 +1,13 @@
 ### Get all songs
 GET http://localhost:3000/api/songs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pa2U5MiIsImlhdCI6MTc0OTY2OTI1MywiZXhwIjoxNzQ5NzU1NjUzfQ.auowee5USM9xu_XAQp0vYCVa1TChJ8RU7f8d3OZ7MFw
+// Authorization: Bearer 
 
 ### Get a user's favorites - SUCCESS
-GET http://localhost:3000/api/dummy/favorites
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Oz-vgDapjhoY_VumbOoskx8sxbViumMdJC1IvtIb6aQ
+GET http://localhost:3000/api/favorites
+// Authorization: Bearer
 
 ### Get a user's favorites - FAIL (user doesn't exist)
-GET http://localhost:3000/api/lol/favorites
+GET http://localhost:3000/api/favorites
 
 ### Add a song to a user's favorites - SUCCESS
 PUT http://localhost:3000/api/dummy/favorites
