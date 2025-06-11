@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useToggleGenrePrefs } from '../hooks/queryGenrePrefs';
+import { useUpdateDisplayName } from '../hooks/queryDisplayName';
 
 interface IModalDisplayName {
   headerLabel: string;
   currentName: string;
   isOpen: boolean;
   onCloseRequested: () => void;
-  onDisplayNameSet: (newName: string) => void;
 }
 
 interface IEditDisplayName {
@@ -33,9 +33,8 @@ interface IModalGenrePrefs {
 
 export function ModalDisplayName(props: IModalDisplayName) {
   const innerDivRef = useRef<HTMLDivElement>(null);
-  const [displayInputText, setDisplayInputText] = useState(props.currentName);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hasSubmitErr, setHasSubmitErr] = useState(false);
+  const [displayInputText, setDisplayInputText] = useState(props.currentName || "");
+  const { mutate: onDisplayNameSet, isPending: isNameUpdateLoading, isError: isNameUpdateError} = useUpdateDisplayName();
 
 
   function handleModalClicked(e: React.MouseEvent<HTMLElement>) {
@@ -46,27 +45,11 @@ export function ModalDisplayName(props: IModalDisplayName) {
   }
 
   async function handleSaveClicked() {
-    setDisplayInputText(displayInputText);
-    setIsSubmitting(true);
-    fetch("/api/songs")
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        setHasSubmitErr(true);
-        throw new Error(`Failed to update display name ${res.status}`);
-      })
-      .then(() => {
-        props.onDisplayNameSet(displayInputText);
+    onDisplayNameSet(displayInputText, { 
+      onSuccess: () => {
         props.onCloseRequested();
-        setHasSubmitErr(false);
-      })
-      .catch(() => {
-        setHasSubmitErr(true);
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      })
+      }}
+    );
   }
 
   if (!props.isOpen) {
@@ -91,8 +74,8 @@ export function ModalDisplayName(props: IModalDisplayName) {
           displayInputText={displayInputText}
           onInputSave={setDisplayInputText}
           onSaveClicked={handleSaveClicked}
-          isSubmitting={isSubmitting}
-          hasSubmitErr={hasSubmitErr}
+          isSubmitting={isNameUpdateLoading}
+          hasSubmitErr={isNameUpdateError}
         />
       </div>
     </div>
@@ -171,5 +154,5 @@ function EditGenrePrefs(props: IEditGenrePrefs) {
         </button>
       ))}
     </div>
-  )
+  );
 }

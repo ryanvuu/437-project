@@ -9,11 +9,12 @@ interface IProfile {
   displayName: string;
   genres: string[];
   genrePrefs: string[];
-  setDisplayName: (newDisplayName: string) => void;
   isDark: boolean;
   toggleIsDark: (isDark: boolean) => void;
   isGenrePrefsLoading: boolean;
   isGenrePrefsError: boolean;
+  isNameLoading: boolean;
+  isNameError: boolean;
 }
 
 export function Profile(props: IProfile) {
@@ -42,7 +43,8 @@ export function Profile(props: IProfile) {
         <img className="profile-pic" src={logo} alt="" height="200" width="200"></img>
 
         <div className="desktop-prof">
-          <h1 className="h1-profile">{props.displayName}</h1>
+          {props.isNameError && <h1 className="h1-profile">Failed to load display name</h1>}
+          <h1 className="h1-profile">{props.isNameLoading ? "Loading..." : props.displayName}</h1>
 
           <div className="profile-container">
             <div className="profile-item genre-favs">
@@ -98,7 +100,6 @@ export function Profile(props: IProfile) {
         currentName={props.displayName}
         isOpen={isDisplayOpen}
         onCloseRequested={closeDisplayModal}
-        onDisplayNameSet={props.setDisplayName}
       />
 
       <ModalGenrePrefs

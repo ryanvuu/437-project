@@ -105,5 +105,18 @@ export class UserProvider {
       });
     }
 
+    async getDisplayName(username: string) {
+      return this.collection.findOne({ username: username })
+        .then(userDoc => {
+          return userDoc?.displayName;
+        });
+    }
+
+    async updateDisplayName(username: string, newName: string): Promise<number> {
+      return this.collection.updateOne({ username: username }, { $set: { displayName: newName } })
+        .then(updatedDoc => {
+          return updatedDoc.matchedCount;
+        });
+    }
 
 }

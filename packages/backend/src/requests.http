@@ -64,3 +64,37 @@ DELETE http://localhost:3000/api/dummy/genre-preferences/classical
 
 ### Remove a genre from a user's genre preferences - FAIL (user doesn't exist)
 DELETE http://localhost:3000/api/lol/genre-preferences/classical
+
+### Get a user's display name - SUCCESS
+GET http://localhost:3000/api/dummy/profile/display-name
+
+### Get a user's display name - FAIL (user doesn't exist)
+GET http://localhost:3000/api/lol/profile/display-name
+
+### Update a user's display name - SUCCESS
+PUT http://localhost:3000/api/dummy/profile/display-name
+Content-Type: application/json
+
+{
+  "newName": "smarty" 
+}
+
+### Update a user's display name- FAIL (missing request body)
+PUT http://localhost:3000/api/dummy/profile/display-name
+Content-Type: application/json
+
+### Update a user's display name - FAIL (user doesn't exist)
+PUT http://localhost:3000/api/lol/profile/display-name
+Content-Type: application/json
+
+{
+  "newName": "xd"
+}
+
+### Update a user's display name - FAIL (new display name can only contain alphanumerical characters)
+PUT http://localhost:3000/api/dummy/profile/display-name
+Content-Type: application/json
+
+{
+  "newName": "argh!!" 
+}

@@ -12,6 +12,8 @@ interface IHome {
   isDark: boolean;
   isFetchingData: boolean;
   hasErrOccurred: boolean;
+  isNameLoading: boolean;
+  isNameError: boolean;
 }
 
 export function Home(props: IHome) {
@@ -19,7 +21,8 @@ export function Home(props: IHome) {
     <div>
 
       <img src={logo} alt="" height="200" width="200" />
-      <h1>Hello, {props.displayName}</h1>
+      {props.isNameError && <h1>Failed to load display name</h1>}
+      {!props.isNameError && <h1>Hello, {props.isNameLoading ? "loading..." : props.displayName}</h1>}
       <div className="suggestions-section">
         
         <h2 className="h2-home">Suggested for you</h2>
