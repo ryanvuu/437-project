@@ -14,6 +14,7 @@ interface IDiscover {
   setCurrentSongPage: (page: number) => void;
   isFetchingData: boolean;
   hasErrOccurred: boolean;
+  authToken: string;
 }
 
 export function Discover(props: IDiscover) {
@@ -70,6 +71,7 @@ export function Discover(props: IDiscover) {
           onRightClicked={goNextSongPage}
           onPrevClicked={goPrevSongPage}
           setCurrentSongPage={props.setCurrentSongPage}
+          authToken={props.authToken}
           /> : null}
        
       </div>

@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
-export function useSongs() {
+export function useSongs(authToken: string) {
   return useQuery({
     queryKey: ["songs"],
     queryFn: async () => {
       const res = await fetch("/api/songs", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${authToken}`
         }
       });
       
@@ -15,6 +16,7 @@ export function useSongs() {
         throw new Error(`Failed to get songs: ${res.status}`);
       }
       return res.json();
-    }
+    },
+    enabled: !!authToken
   })
 }

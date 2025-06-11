@@ -12,9 +12,8 @@ function isAlphanumeric(str: string): boolean {
 export function registerUserRoutes(app: express.Application, userProvider: UserProvider) {
 
   // Get a user's favorite songs
-  // endpoint will eventually be /api/favorites after adding authentication
-  app.get("/api/:username/favorites", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.get("/api/favorites", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
 
     if (!username) {
       return res.status(400).send({
@@ -44,9 +43,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Add a song to a user's favorite songs
-  // endpoint will eventually be /api/favorites after adding authentication
-  app.put("/api/:username/favorites", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.put("/api/favorites", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
     const songId = req.body.songId;
 
     if (!username) {
@@ -91,9 +89,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Remove a song from a user's favorite songs
-  // endpoint will eventually be /api/favorites/:songId after adding authentication
-  app.delete("/api/:username/favorites/:songId", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.delete("/api/favorites/:songId", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
     const songId = req.params.songId;
 
     if (!username) {
@@ -138,9 +135,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Get a user's genre preferences
-  // endpoint will eventually be /api/genre-preferences after adding authentication
-  app.get("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.get("/api/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
 
     if (!username) {
       return res.status(400).send({
@@ -170,9 +166,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Add a song to a user's genre preferences
-  // endpoint will eventually be /api/genre-preferences after adding authentication
-  app.put("/api/:username/genre-preferences", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.put("/api/genre-preferences", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
     const genre = req.body.genre;
 
     if (!username) {
@@ -208,9 +203,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Add a song to a user's genre preferences
-  // endpoint will eventually be /api/genre-preferences after adding authentication
-   app.delete("/api/:username/genre-preferences/:genre", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+   app.delete("/api/genre-preferences/:genre", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
     const genre = req.params.genre;
 
     if (!username) {
@@ -246,9 +240,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Get a user's display name
-  // endpoint will eventually be /api/profile/display-name after adding authentication
-  app.get("/api/:username/profile/display-name", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.get("/api/profile/display-name", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
 
     if (!username) {
       return res.status(400).send({
@@ -278,9 +271,8 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
   });
 
   // Update a user's display name
-  // endpoint will eventually be /api/profile/display-name after adding authentication
-  app.put("/api/:username/profile/display-name", async (req: Request, res: Response): Promise<any> => {
-    const username = req.params.username;
+  app.patch("/api/profile/display-name", async (req: Request, res: Response): Promise<any> => {
+    const username = req.user?.username;
     const newName = req.body.newName;
 
     if (!username) {

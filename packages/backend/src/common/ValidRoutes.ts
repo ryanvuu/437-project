@@ -4,5 +4,7 @@ export const ValidRoutes = {
   ABOUT: "/about",
   PROFILE: "/profile",
   FAVORITES: "/favorites",
-  SONG_DETAILS: "/songs/:songId"
+  SONG_DETAILS: "/songs/:songId",
+  REGISTER: "/register",
+  LOGIN: "/login"
 }

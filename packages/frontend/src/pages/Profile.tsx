@@ -15,6 +15,7 @@ interface IProfile {
   isGenrePrefsError: boolean;
   isNameLoading: boolean;
   isNameError: boolean;
+  authToken: string;
 }
 
 export function Profile(props: IProfile) {
@@ -99,6 +100,7 @@ export function Profile(props: IProfile) {
         headerLabel="Edit Display Name"
         currentName={props.displayName}
         isOpen={isDisplayOpen}
+        authToken={props.authToken}
         onCloseRequested={closeDisplayModal}
       />
 
@@ -108,6 +110,7 @@ export function Profile(props: IProfile) {
         genrePrefs={props.genrePrefs}
         isOpen={isFavGenresOpen}
         onCloseRequested={closeGenresModal}
+        authToken={props.authToken}
       />
       <Navbar />
     </div>

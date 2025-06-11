@@ -1,7 +1,7 @@
 import { MongoClient, ObjectId, Collection } from "mongodb";
 
-interface IUserDocument {
-  _id: ObjectId;
+export interface IUserDocument {
+  _id?: ObjectId;
   username: string;
   displayName: string;
   genrePrefs: string[];

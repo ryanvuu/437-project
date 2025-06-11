@@ -8,6 +8,7 @@ interface ISongList {
   onRightClicked: () => void;
   onPrevClicked: () => void;
   setCurrentSongPage: (pageIndex: number) => void;
+  authToken: string;
 }
 
 function SongList(props: ISongList) {
@@ -20,6 +21,7 @@ function SongList(props: ISongList) {
             song={song}
             layout="horizontal"
             favSongs={props.favSongs}
+            authToken={props.authToken}
           />
         ))}
       </ul>

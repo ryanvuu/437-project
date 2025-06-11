@@ -1,0 +1,41 @@
+### New user registration
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "mike92", "password": "password123" }
+
+### Register user already exists
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "mike92", "password": "incorrect" }
+
+### Register bad request body
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "casey" }
+
+### Login successful
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "mike92", "password": "password123" }
+
+### Login failed: user doesn't exist
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "norecordofthisUser", "password": "password" }
+
+### Login failed: incorrect password
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "abcdefg" }
+
+### Login missing password
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "casey" }

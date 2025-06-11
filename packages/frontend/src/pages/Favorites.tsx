@@ -8,6 +8,7 @@ interface IFavorites {
   favSongs: IApiSongData[];
   isLoading: boolean;
   isError: boolean;
+  authToken: string;
 }
 
 export function Favorites(props: IFavorites) {
@@ -27,7 +28,7 @@ export function Favorites(props: IFavorites) {
       {!props.isLoading && !props.isError ?
         <div className="song-info-container">
           {props.favSongs?.map((song: IApiSongData) => (
-            <SongItem key={song.id} song={song} layout="horizontal" favSongs={props.favSongs} />
+            <SongItem key={song.id} song={song} layout="horizontal" favSongs={props.favSongs} authToken={props.authToken} />
           ))}
         </div> : null}
       

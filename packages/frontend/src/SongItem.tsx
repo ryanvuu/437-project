@@ -9,10 +9,11 @@ interface ISongItem {
   song: IApiSongData;
   layout: string;
   favSongs: IApiSongData[];
+  authToken: string
 }
 
 function SongItem( props: ISongItem ) {
-  const { mutate: toggleFavorite } = useToggleFavorite();
+  const { mutate: toggleFavorite } = useToggleFavorite(props.authToken);
 
   return (
     <div>

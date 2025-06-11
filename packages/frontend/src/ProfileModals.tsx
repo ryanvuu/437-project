@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useToggleGenrePrefs } from '../hooks/queryGenrePrefs';
-import { useUpdateDisplayName } from '../hooks/queryDisplayName';
+import { useDisplayName, useUpdateDisplayName } from '../hooks/queryDisplayName';
 
 interface IModalDisplayName {
   headerLabel: string;
   currentName: string;
   isOpen: boolean;
+  authToken: string;
   onCloseRequested: () => void;
 }
 
@@ -21,6 +22,7 @@ interface IEditDisplayName {
 interface IEditGenrePrefs {
   genres: string[];
   genrePrefs: string[];
+  authToken: string;
 }
 
 interface IModalGenrePrefs {
@@ -29,12 +31,14 @@ interface IModalGenrePrefs {
   genrePrefs: string[];
   isOpen: boolean;
   onCloseRequested: () => void;
+  authToken: string;
 }
 
 export function ModalDisplayName(props: IModalDisplayName) {
   const innerDivRef = useRef<HTMLDivElement>(null);
   const [displayInputText, setDisplayInputText] = useState(props.currentName || "");
-  const { mutate: onDisplayNameSet, isPending: isNameUpdateLoading, isError: isNameUpdateError} = useUpdateDisplayName();
+  const { refetch, isFetching } = useDisplayName(props.authToken);
+  const { mutate: onDisplayNameSet, isError: isNameUpdateError} = useUpdateDisplayName(props.authToken);
 
 
   function handleModalClicked(e: React.MouseEvent<HTMLElement>) {
@@ -47,7 +51,10 @@ export function ModalDisplayName(props: IModalDisplayName) {
   async function handleSaveClicked() {
     onDisplayNameSet(displayInputText, { 
       onSuccess: () => {
-        props.onCloseRequested();
+        refetch()
+          .then(() => {
+            props.onCloseRequested();
+          })
       }}
     );
   }
@@ -74,7 +81,7 @@ export function ModalDisplayName(props: IModalDisplayName) {
           displayInputText={displayInputText}
           onInputSave={setDisplayInputText}
           onSaveClicked={handleSaveClicked}
-          isSubmitting={isNameUpdateLoading}
+          isSubmitting={isFetching}
           hasSubmitErr={isNameUpdateError}
         />
       </div>
@@ -133,6 +140,7 @@ export function ModalGenrePrefs(props: IModalGenrePrefs) {
         <EditGenrePrefs
           genres={props.genres}
           genrePrefs={props.genrePrefs}
+          authToken={props.authToken}
         />
       </div>
     </div>
@@ -140,7 +148,7 @@ export function ModalGenrePrefs(props: IModalGenrePrefs) {
 }
 
 function EditGenrePrefs(props: IEditGenrePrefs) {
-  const { mutate: onToggleFavGenre } = useToggleGenrePrefs();
+  const { mutate: onToggleFavGenre } = useToggleGenrePrefs(props.authToken);
 
   return (
     <div className="edit-genres-btns">

@@ -14,6 +14,7 @@ interface IHome {
   hasErrOccurred: boolean;
   isNameLoading: boolean;
   isNameError: boolean;
+  authToken: string;
 }
 
 export function Home(props: IHome) {
@@ -32,12 +33,13 @@ export function Home(props: IHome) {
         {!props.isFetchingData && !props.hasErrOccurred ?
           <div className="suggestions-container">
             {props.songList?.map((song) => (
-              props.genrePrefs.includes(song.genre.toLowerCase()) ? (
+              props.genrePrefs?.includes(song.genre.toLowerCase()) ? (
                 <SongItem
                   key={song.id} 
                   song={song}
                   layout="vertical"
                   favSongs={props.favSongs}
+                  authToken={props.authToken}
                 />
               ) : (
                 null
