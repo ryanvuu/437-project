@@ -30,11 +30,7 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
             message: "User doesn't exist"
           });
         }
-
-        waitDuration(2000)
-          .then(() => {
-            res.json(favorites);
-          });
+        res.json(favorites);
       })
       .catch(error => {
         console.error("Error! Failed to get user's favorites:", error);
@@ -153,11 +149,7 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
             message: "User doesn't exist"
           });
         }
-
-        waitDuration(2000)
-          .then(() => {
-            res.json(genres);
-          });
+        res.json(genres);
       })
       .catch(error => {
         console.error("Error! Failed to get user's genre preferences:", error);
@@ -258,11 +250,7 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
             message: "User doesn't exist"
           });
         }
-
-        waitDuration(2000)
-          .then(() => {
-            res.json(displayName);
-          });
+        res.json(displayName);
       })
       .catch(error => {
         console.error("Error! Failed to get user's display name:", error);
@@ -320,10 +308,4 @@ export function registerUserRoutes(app: express.Application, userProvider: UserP
         return res.status(500).send();
       });
   });
-
-
-}
-
-function waitDuration(numMs: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, numMs));
 }

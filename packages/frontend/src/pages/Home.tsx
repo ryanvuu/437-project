@@ -18,6 +18,51 @@ interface IHome {
 }
 
 export function Home(props: IHome) {
+  function getSuggestedSongs(songList: IApiSongData[], genrePrefs: string[], n: number): IApiSongData[] {
+    const normalizedPrefs = genrePrefs.map(g => g.toLowerCase());
+
+    const preferredSongs = songList.filter(song =>
+      normalizedPrefs.includes(song.genre.toLowerCase())
+    );
+
+    let selectedSongs: IApiSongData[] = [];
+
+    if (preferredSongs.length >= n) {
+      selectedSongs = getRandomElements(preferredSongs, n);
+    } else {
+      selectedSongs = [...preferredSongs];
+
+      const preferredIds = new Set(preferredSongs.map(song => song.id));
+      const remainingSongs = songList.filter(song => !preferredIds.has(song.id));
+      const additionalSongs = getRandomElements(remainingSongs, n - selectedSongs.length);
+
+      selectedSongs.push(...additionalSongs);
+    }
+
+    return selectedSongs;
+  }
+
+
+  function getRandomElements(arr: IApiSongData[], count: number): IApiSongData[] {
+    const result: IApiSongData[] = [];
+    const usedIndices = new Set<number>();
+
+    while (result.length < count && arr.length > 0) {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      if (!usedIndices.has(randomIndex)) {
+        usedIndices.add(randomIndex);
+        result.push(arr[randomIndex]);
+      }
+    }
+
+    return result;
+  }
+
+  const suggestedSongs = props.songList && props.genrePrefs
+    ? getSuggestedSongs(props.songList, props.genrePrefs, 5)
+    : [];
+
+
   return (
     <div>
 
@@ -32,21 +77,16 @@ export function Home(props: IHome) {
         {props.hasErrOccurred ? <p style={{fontSize: "2rem", color: "#F9EE45", margin: "2rem"}}>Failed to load songs.</p> : null}
         {!props.isFetchingData && !props.hasErrOccurred ?
           <div className="suggestions-container">
-            {props.songList?.map((song) => (
-              props.genrePrefs?.includes(song.genre.toLowerCase()) ? (
-                <SongItem
-                  key={song.id} 
-                  song={song}
-                  layout="vertical"
-                  favSongs={props.favSongs}
-                  authToken={props.authToken}
-                />
-              ) : (
-                null
-              )))}
+            {suggestedSongs.map((song) => (
+              <SongItem
+                key={song.id}
+                song={song}
+                layout="vertical"
+                favSongs={props.favSongs}
+                authToken={props.authToken}
+              />
+            ))}
           </div> : null}
-        
-
       </div>
 
       <Navbar />

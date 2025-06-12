@@ -7,18 +7,11 @@ export function registerSongRoutes(app: express.Application, songProvider: SongP
   app.get("/api/songs", (req: Request, res: Response) => {
     songProvider.getAllSongs()
       .then(songs => {
-        waitDuration(2000)
-          .then(() => {
-            res.json(songs)
-          })
-          .catch(error => {
-            console.error("Failed to retrieve songs:", error)
-          })
+        res.json(songs);
       })
+      .catch(error => {
+        console.error("Failed to retrieve songs:", error)
+      });
   });
 
-}
-
-function waitDuration(numMs: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, numMs));
 }
